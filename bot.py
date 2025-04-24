@@ -106,7 +106,7 @@ async def add_user(message: types.Message):
     with open("users.json", "w", encoding="utf-8") as f:
         json.dump(USERS, f, ensure_ascii=False, indent=2)
 
-    await message.reply(f"✅ Пользователь `{new_id}` добавлен как "{name}"", parse_mode="Markdown")
+    await message.reply(f"✅ Пользователь `{new_id}` добавлен как \"{name}\"", parse_mode="Markdown")
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
