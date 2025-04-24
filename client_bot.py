@@ -48,6 +48,15 @@ async def start_cmd(message: types.Message):
     
     await message.reply("👋 Привет! Пожалуйста, отправьте данные о вашем обороте.")
 
+
+async def on_startup(dp):
+    asyncio.create_task(send_reminder())  # <-- запуск напоминаний здесь
+
+if __name__ == "__main__":
+    from aiogram import executor
+    executor.start_polling(dp, on_startup=on_startup)
+
+
 # Обработка данных от магазина (КК и СБП)
 @dp.message_handler(lambda message: message.text.startswith("КК") or message.text.startswith("СБП"))
 async def handle_data(message: types.Message):
@@ -75,7 +84,3 @@ async def handle_data(message: types.Message):
                          f"КК: {data[user_id].get('КК', 'не указано')}\nСБП: {data[user_id].get('СБП', 'не указано')}\n"
                          f"Спасибо за отправку! Обновите данные, если они изменятся.")
 
-if __name__ == "__main__":
-    from aiogram import executor
-    asyncio.create_task(send_reminder())  # Запуск напоминаний
-    executor.start_polling(dp, skip_updates=True)
