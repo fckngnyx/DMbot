@@ -1,5 +1,8 @@
 import os
 
+from dotenv import load_dotenv
+load_dotenv()
+
 # Токен для админского бота
 ADMIN_BOT_TOKEN = os.getenv("ADMIN_BOT_TOKEN")
 
