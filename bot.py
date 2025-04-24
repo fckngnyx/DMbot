@@ -19,6 +19,11 @@ try:
 except FileNotFoundError:
     DATA = {}
 
+@dp.message_handler(commands=["start"])
+async def start(message: types.Message):
+    print(f"Пользователь: {message.from_user.id}")  # DEBUG
+    await message.reply("Бот работает ✅")
+
 CURRENT_TIME = None
 
 # Команда /set_time
